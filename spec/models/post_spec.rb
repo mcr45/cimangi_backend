@@ -17,6 +17,10 @@ RSpec.describe Post, type: :model do
     post=build(:post,body:'nulla')
     expect(post).not_to be_valid
   end
+  it'does not create a post longer than 256 chraracters' do
+    post=build(:post,body:"a"*257)
+    expect(post).not_to be_valid
+  end
 end
 it 'does associate a post to the user' do
   user=build(:user)
