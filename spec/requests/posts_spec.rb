@@ -28,6 +28,7 @@ RSpec.describe "Posts", type: :request do
     it "return all post" do
       expect(@body.size).to eq(10)
     end
+    
   end
   describe 'GET/show'do
     let(:post_id){create(:post).id}
@@ -42,6 +43,21 @@ RSpec.describe "Posts", type: :request do
       #debugger
       expect(@body.keys).to include(*expected_post.keys)
     end
+  end
+  describe 'POST/posts'do
+
+    it 'does not create a post with no title'do
+      post'/posts', params: attributes_for(:post,title:nil)
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+    it 'does not create a post with no body'do
+      post'/posts', params: attributes_for(:post,body:nil)
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+
+
+
   end
 
 

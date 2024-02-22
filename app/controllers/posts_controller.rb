@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     def create
-        post=Post.new(params)
+        post=Post.new(post_params)
         if post.save
             render json: post, status: :created
         else
@@ -24,6 +24,6 @@ class PostsController < ApplicationController
 
     private
     def post_params
-
+        params.permit(:title,:body,:likes,:user_id)
     end
 end
