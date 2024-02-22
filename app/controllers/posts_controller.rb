@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    before_action :authenticate_request
     def create
         post=Post.new(post_params)
         if post.save
