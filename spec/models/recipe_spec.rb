@@ -20,6 +20,7 @@ RSpec.describe Recipe, type: :model do
  it'associate a recipe to a user if given a reference'do
   user=build(:user)
   recipe=build(:recipe,user:user)
+  
   expect(recipe.user_id).to eq(user.id)
  end
 end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/login", to:"sessions#create"
   resources :users
   resources :posts
+  resources :recipes
   # Defines the root path route ("/")
   # root "posts#index"
 end

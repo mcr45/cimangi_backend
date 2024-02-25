@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Posts", type: :request do
   let(:expected_post)do
     {"title"=>String,
-    "body"=>"String",
+    "body"=>String,
     "likes"=>Integer,
     "user_id"=>Integer}
   end
