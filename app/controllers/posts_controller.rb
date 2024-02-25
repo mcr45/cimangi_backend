@@ -19,8 +19,24 @@ class PostsController < ApplicationController
         posts=Post.all
         render json: posts
     end
+    def update
+        post=Post.find(params[:id])
+        if post.user_id=@current_user
+            post.update!(post_params)
+        else
+            render json: {error:'not the post author'}, status: :unauthorized
+        end
+        
+    end
 
-
+    def destroy
+        post=Post.find(params[:id])
+        if post.user_id=@current_user
+            post.destroy
+        else
+            render json: {error:'not the post author'}, status: :unauthorized
+        end
+    end
 
 
     private
