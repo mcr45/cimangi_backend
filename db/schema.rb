@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_223716) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_27_015423) do
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "body"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -41,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_223716) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "recipes", "users"
 end
