@@ -9,18 +9,9 @@ class CommentsController < ApplicationController
 
     def create
         #this is for testing purpose, in production I will get user id from the controller after authentication
-        #comment=Comment.new(comment_params)
-        #debugger
-        #comment=@resource.comments.create(comment_params[:body],user_id:3)
         u=User.create(first_name:'jeff',username:'boboboobo',last_name:"Bezos",email:'amazon@amazon.com',password:'password',password_confirmation:'password')
         @comment=@resource.comments.new(body:comment_params[:body],user:u)
-        #comment.user_id=3
-        #debugger
-        #@comment.save
-        
-        #debugger
-        #comment.user_id=3
-        #debugger
+       #this is just for test purpose, in production i will get user from @current_user
         if @comment
             #debugger
             render json: @comment, status: :ok
