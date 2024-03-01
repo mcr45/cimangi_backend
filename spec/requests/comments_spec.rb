@@ -4,18 +4,27 @@ RSpec.describe "Comments", type: :request do
 
   describe "GET /comments" do
     before do
-      post=create(:post)
-      user=create(:user)
+      @post=build(:post)
+      #debugger
+      @user=create(:user)
+      @post.user_id=@user.id
+      @post.save
       10.times do |i|
-        post.comments.create(body:'hey there')
+        @post.comments.create(body:'hey there',user:@user)
+        #debugger
       end
-      @body=response.body
+      #debugger
+      #get "/posts/#{@post.id}/comments"
+      #debugger
+      #@body=JSON.parse(response.body)
     end
     context 'it return al resource related comments' do
       it'load all the comments' do
-      get '/posts/comments'
-      expect(body.size).to eq(post.comments.size)
-      expect(response).to have_http-status_status(:success)
+      get "/posts/#{@post.id}/comments"
+      #debugger
+      @body=JSON.parse(response.body)
+      expect(@body.size).to eq(@post.comments.size)
+      expect(response).to have_http_status(:success)
       end
     end
 
@@ -25,8 +34,10 @@ RSpec.describe "Comments", type: :request do
       it"add the comment to the resource"do
         user=create(:user)
         post=create(:post)
-        post "/posts/comments", params: attributes_for(:comment,user:user)
-        expect(response).to have_http_status(:succes)
+        post.user_id=user.id
+        post "/posts/#{post.id}/comments", params: attributes_for(:comment,body:'hey there')
+        #debugger
+        expect(response).to have_http_status(:success)
       end
     end
   end

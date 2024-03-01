@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :authenticate_request,except:[:index]
+    #before_action :authenticate_request,except:[:index]
     def create
         post=Post.new(post_params)
         if post.save
