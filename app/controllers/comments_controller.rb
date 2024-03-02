@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
     def create
         #this is for testing purpose, in production I will get user id from the controller after authentication
-        u=User.create(first_name:'jeff',username:'boboboobo',last_name:"Bezos",email:'amazon@amazon.com',password:'password',password_confirmation:'password')
+        #u=User.create(first_name:'jeff',username:'boboboobo',last_name:"Bezos",email:'amazon@amazon.com',password:'password',password_confirmation:'password')
         @comment=@resource.comments.new(body:comment_params[:body],user:u)
        #this is just for test purpose, in production i will get user from @current_user
         if @comment
