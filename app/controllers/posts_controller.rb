@@ -10,14 +10,16 @@ class PostsController < ApplicationController
     end
     def show
         post=Post.find(params[:id])
-        render json: post
+        #render json: post
+        render json: PostBlueprint.render(post,view: :normal)
     end
     
 
 
     def index
         posts=Post.all
-        render json: posts
+        #render json: posts
+        render json: PostBlueprint.render(post,view: :normal)
     end
     def update
         post=Post.find(params[:id])

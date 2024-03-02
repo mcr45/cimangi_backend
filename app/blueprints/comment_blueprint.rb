@@ -2,6 +2,10 @@
 
 class CommentBlueprint < Blueprinter::Base
     fields :body
-    association :user, blueprinter: UserBlueprint, view: normal
-    association :post, blueprinter: PostBlueprint, view: normal
+    view :normal do
+        fields :body
+        association :user, blueprint: UserBlueprint, view: :restricted
+    #association :post, blueprint: PostBlueprint, view: normal
+    end
+    
 end

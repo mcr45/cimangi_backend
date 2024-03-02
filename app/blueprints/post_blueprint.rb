@@ -3,9 +3,11 @@
 class PostBlueprint < Blueprinter::Base
 
     identifier :id
-    fields :title, :body, :likes
+     association :comments, blueprint: CommentBlueprint,view: :normal
     view :normal do
-       association :user, blueprinter: UserBlueprint, view: :normal
-       association :comment, blueprinter: CommentBlueprint, view: :normal
-    end
+       fields :title, :body, :likes
+          
+
+     end
+     
 end
