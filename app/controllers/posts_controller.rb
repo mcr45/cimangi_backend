@@ -18,8 +18,8 @@ class PostsController < ApplicationController
 
     def index
         posts=Post.all
-        #render json: posts
-        render json: PostBlueprint.render(post,view: :normal)
+        render json: posts
+        #render json: PostBlueprint.render(posts,view: :normal)
     end
     def update
         post=Post.find(params[:id])
