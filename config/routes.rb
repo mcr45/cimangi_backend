@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :posts do
     resource :comments
   end
+  #get 'newpost',to:"posts#new_index"
   resources :recipes 
   # Defines the root path route ("/")
   # root "posts#index"

@@ -18,8 +18,27 @@ class PostsController < ApplicationController
 
     def index
         posts=Post.all
-        render json: posts
-        #render json: PostBlueprint.render(posts,view: :normal)
+        #render json: posts
+        render json: PostBlueprint.render(posts,view: :normal)
+    end
+    def new_index
+        posts=Post.all
+        post_auth={}
+        allpost=[]
+        ind=0
+        posts.each do |p| 
+            post_auth['title']=p.title
+            post_auth['body']=p.body
+            post_auth['likes']=p.likes
+            u=User.find(p.user_id)
+            
+            post_auth["author"]=u.username
+            allpost.push(post_auth)
+            ind=ind+1
+           
+            
+        end
+        render json: allpost
     end
     def update
         post=Post.find(params[:id])

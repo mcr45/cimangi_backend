@@ -8,6 +8,9 @@ class UserBlueprint < Blueprinter::Base
         association :posts, blueprint: PostBlueprint, view: :normal
        #  association :post, blueprint: PostBluePrint, view: :normal
     end
+    view :author do
+        fields :username
+    end
     view :restricted do
         fields :username
     end
