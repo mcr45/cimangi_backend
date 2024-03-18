@@ -21,7 +21,8 @@ class PostsController < ApplicationController
 
     def index
         posts=Post.all
-        posts=posts.sample(20)
+        #posts=posts.sample(7)
+        posts=posts.take(7)
         #in production i will get the latest post(in order) and all post from two different actions.
         #render json: posts
         render json: PostBlueprint.render(posts,view: :normal)

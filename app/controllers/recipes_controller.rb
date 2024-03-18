@@ -1,7 +1,9 @@
 class RecipesController < ApplicationController
     def index
         recipes=Recipe.all
-        render json: recipes, status: :ok
+        #render json: recipes, status: :ok
+        recipes=recipes.take(9)
+        render json: RecipeBlueprint.render(recipes,view: :normal)
     end
     def create
         recipe=Recipe.new(recipe_params)
