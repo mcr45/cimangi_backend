@@ -15,11 +15,11 @@ class RecipesController < ApplicationController
     end
     def show
         recipe=Recipe.find(params[:id])
-        render json: recipe,status: :ok
+        render json: RecipeBlueprint.render(recipe,view: :normal)
     end
     def update
         recipe=Recipe.find(params[:id])
-        if recipe.user_id && recipe.user_id=@current_user 
+        if recipe.user_id && recipe.user_id==@current_user 
             recipe.update(recipe_params)
         else
             render json: {error:'not the author of the recipe'}, status: :unauthorized

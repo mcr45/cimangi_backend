@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
     end
     def define_resource
         @resource=Post.find_by_id(params[:post_id]) if params[:post_id]
-        
+        @resource=Recipe.find_by_id(params[:recipe_id]) if params[:recipe_id]
     end
     
 end
