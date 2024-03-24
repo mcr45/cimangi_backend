@@ -3,11 +3,11 @@
 # Avoid CORS issues when API is called from the frontend app.
 # Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin Ajax requests.
 
-# Read more: https://github.com/cyu/rack-cors
+# Read more: https://github.com/cyu/rack-cors http://localhost:4200
 
  Rails.application.config.middleware.insert_before 0, Rack::Cors do
    allow do
-     origins "http://localhost:4200"
+     origins "https://cimangi-frontend.vercel.app/"
      resource "*",
        headers: :any,
        methods: [:get, :post, :put, :patch, :delete, :options, :head]
