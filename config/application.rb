@@ -42,3 +42,11 @@ module Cucina
     config.api_only = true
   end
 end
+
+#tring to finx cors errors
+config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'https://cimangi-frontend.vercel.app/'  
+    resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :patch, :options]
+  end
+end
