@@ -30,7 +30,7 @@ class PostsController < ApplicationController
    
     def update
         post=Post.find(params[:id])
-        if post.user_id=@current_user
+        if post.user_id==@current_user
             post.update!(post_params)
         else
             render json: {error:'not the post author'}, status: :unauthorized
