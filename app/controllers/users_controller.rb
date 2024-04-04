@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+=begin  
     def create
         user=User.new(user_params)
         if user.save
@@ -7,6 +8,17 @@ class UsersController < ApplicationController
             render json: user.errors.full_messages, status: :unprocessable_entity
         end
     end
+=end
+def create
+    user=User.new(user_params)
+    if user.save
+        tkn=create_token(user.id)
+        
+        render json: {user:UserBlueprint.render(user,view: :normal),token:tkn}, status: :created
+    else
+        render json: user.errors.full_messages, status: :unprocessable_entity
+    end
+end
     def show
        user=User.find_by(id:params[:id])
        render json: UserBlueprint.render(user,view: :normal) 

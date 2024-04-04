@@ -6,9 +6,12 @@ class RecipesController < ApplicationController
         render json: RecipeBlueprint.render(recipes,view: :normal)
     end
     def create
+        #in production i will get the current user,now i just choose user 4
+        user=User.find(4)
         recipe=Recipe.new(recipe_params)
+        recipe.user=user
         if recipe.save
-            render json: recipe, status: :created 
+            render RecipeBlueprint.render(recipe,view: :normal), status: :created 
         else
             render json: recipe.errors, status: :unprocessable_entity
         end

@@ -46,7 +46,11 @@ class PostsController < ApplicationController
             render json: {error:'not the post author'}, status: :unauthorized
         end
     end
-
+    def best_post
+        p=Post.order(likes: :desc)
+        post=p[0]
+        render json: PostBlueprint.render(post,view: :normal)
+    end
 
     private
     def post_params
