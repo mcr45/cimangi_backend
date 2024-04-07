@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
     before_action :authenticate_request,except:[:index,:best_post]
+    
     def create
-        
         user=@current_user
         post=Post.new(post_params)
         post.user=user
@@ -13,17 +13,11 @@ class PostsController < ApplicationController
     end
     def show
         post=Post.find(params[:id])
-        
         render json: PostBlueprint.render(post,view: :normal)
     end
-    
-
-
     def index
-        posts=Post.all
-        
+        posts=Post.all 
         posts=posts.take(7)
-      
         render json: PostBlueprint.render(posts,view: :normal)
     end
    
@@ -39,7 +33,7 @@ class PostsController < ApplicationController
 
     def destroy
         post=Post.find(params[:id])
-        if post.user_id=@current_user
+        if post.user_id==@current_user
             post.destroy
         else
             render json: {error:'not the post author'}, status: :unauthorized

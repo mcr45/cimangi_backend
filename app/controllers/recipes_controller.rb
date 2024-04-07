@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+    before_action :authenticate_request,except:[:index]
     def index
         recipes=Recipe.all
         #render json: recipes, status: :ok
@@ -6,8 +7,8 @@ class RecipesController < ApplicationController
         render json: RecipeBlueprint.render(recipes,view: :normal)
     end
     def create
-        #in production i will get the current user,now i just choose user 4
-        user=User.find(4)
+        
+        user=@current_user
         recipe=Recipe.new(recipe_params)
         recipe.user=user
         if recipe.save
@@ -30,7 +31,7 @@ class RecipesController < ApplicationController
     end
     def destroy
         recipe=Recipe.find(params[:id])
-        if recipe.user_id && recipe.user_id=@current_user 
+        if recipe.user_id && recipe.user_id==@current_user 
             recipe.destroy
         else
             render json: {error:'not the author of the recipe'}, status: :unauthorized

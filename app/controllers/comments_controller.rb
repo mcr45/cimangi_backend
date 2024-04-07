@@ -14,8 +14,7 @@ class CommentsController < ApplicationController
         @comment=@resource.comments.new(body:comment_params[:body])
         @comment.user=u
        
-        if @comment.save
-            
+        if @comment.save   
             render json: @comment, status: :ok
         else
             render json: {error:'comment invalid'}, status: :unprocessable_entity
