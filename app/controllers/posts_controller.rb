@@ -23,8 +23,11 @@ class PostsController < ApplicationController
    
     def update
         post=Post.find(params[:id])
-        if post.user_id==@current_user
+        if post.user_id==@current_user.id
             post.update!(post_params)
+            posts=Post.all 
+            posts=posts.take(7)
+            render json: PostBlueprint.render(posts,view: :normal)
         else
             render json: {error:'not the post author'}, status: :unauthorized
         end
@@ -33,8 +36,11 @@ class PostsController < ApplicationController
 
     def destroy
         post=Post.find(params[:id])
-        if post.user_id==@current_user
+        if post.user_id==@current_user.id
             post.destroy
+            posts=Post.all 
+            posts=posts.take(7)
+            render json: PostBlueprint.render(posts,view: :normal)
         else
             render json: {error:'not the post author'}, status: :unauthorized
         end

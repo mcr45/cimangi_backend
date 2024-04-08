@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
         recipe=Recipe.new(recipe_params)
         recipe.user=user
         if recipe.save
-            render RecipeBlueprint.render(recipe,view: :normal), status: :created 
+            render json: recipe, status: :created 
         else
             render json: recipe.errors, status: :unprocessable_entity
         end
@@ -40,6 +40,6 @@ class RecipesController < ApplicationController
 
     private
     def recipe_params
-        params.permit(:title,:body,:category,:user_id)
+        params.permit(:title,:body,:category)
     end
 end
