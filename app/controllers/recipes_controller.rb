@@ -23,8 +23,11 @@ class RecipesController < ApplicationController
     end
     def update
         recipe=Recipe.find(params[:id])
-        if recipe.user_id && recipe.user_id==@current_user 
+        if  recipe.user_id==@current_user.id 
             recipe.update(recipe_params)
+            recipes=Recipe.all
+            recipes=recipes.take(9)
+            render json: RecipeBlueprint.render(recipes,view: :normal)
         else
             render json: {error:'not the author of the recipe'}, status: :unauthorized
         end
@@ -35,7 +38,7 @@ class RecipesController < ApplicationController
             recipe.destroy
             recipes=Recipe.all
             recipes=recipes.take(9)
-        render json: RecipeBlueprint.render(recipes,view: :normal)
+            render json: RecipeBlueprint.render(recipes,view: :normal)
         else
             render json: {error:'not the author of the recipe'}, status: :unauthorized
         end
