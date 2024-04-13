@@ -51,6 +51,11 @@ class PostsController < ApplicationController
         post=p[0]
         render json: PostBlueprint.render(post,view: :normal)
     end
+    def my_most_viewed
+        posts=Post.where(user_id:@current_user.id).order(views: :desc)
+        post=posts[0]
+        render json: PostBlueprint.render(post,view: :normal)
+    end
 
     private
     def post_params

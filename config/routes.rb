@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "loggeduser",to:"users#load_user"
   resources :users
   get 'bestpost',to:'posts#best_post'
+  get 'topviewsp', to:'posts#my_most_viewed'
   resources :posts do
     resource :comments
   end
