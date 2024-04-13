@@ -13,10 +13,11 @@ class PostsController < ApplicationController
     end
     def show
         post=Post.find(params[:id])
+        post.increment!(:views)
         render json: PostBlueprint.render(post,view: :normal)
     end
     def index
-        posts=Post.all 
+        posts=Post.order(created_at: :desc).page
         posts=posts.take(7)
         render json: PostBlueprint.render(posts,view: :normal)
     end
