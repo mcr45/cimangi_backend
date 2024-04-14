@@ -19,6 +19,7 @@ class RecipesController < ApplicationController
     end
     def show
         recipe=Recipe.find(params[:id])
+        recipe.increment!(:views)
         render json: RecipeBlueprint.render(recipe,view: :normal)
     end
     def update
@@ -42,6 +43,11 @@ class RecipesController < ApplicationController
         else
             render json: {error:'not the author of the recipe'}, status: :unauthorized
         end
+    end
+    def my_most_viewed
+        recipes=Recipe.where(user_id:@current_user.id).order(views: :desc)
+        recipe=recipes[0]
+        render json: RecipeBlueprint.render(recipe,view: :normal)
     end
 
     private
