@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   post "/login", to:"sessions#create"
   get "loggeduser",to:"users#load_user"
+  get "likes/:id", to:"likes#like"
   resources :users
   get 'bestpost',to:'posts#best_post'
   get 'topviewsp', to:'posts#my_most_viewed'
