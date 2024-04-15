@@ -17,9 +17,8 @@ class PostsController < ApplicationController
         render json: PostBlueprint.render(post,view: :normal)
     end
     def index
-        posts=Post.order(created_at: :desc).page
-        posts=posts.take(7)
-        render json: PostBlueprint.render(posts,view: :normal)
+        posts=Post.order(created_at: :desc).page(params[:page]).per(12)
+        render json: {posts:PostBlueprint.render_as_json(posts,view: :normal),total_pages:posts.total_pages,current_page:posts.current_page}
     end
    
     def update

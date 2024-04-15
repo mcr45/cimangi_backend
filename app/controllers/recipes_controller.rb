@@ -1,10 +1,9 @@
 class RecipesController < ApplicationController
     before_action :authenticate_request,except:[:index]
     def index
-        recipes=Recipe.all
-        #render json: recipes, status: :ok
-        recipes=recipes.take(9)
-        render json: RecipeBlueprint.render(recipes,view: :normal)
+        recipes=Recipe.order(created_at: :desc).page(params[:page]).per(12)
+        
+        render json: {recipes:RecipeBlueprint.render_as_json(recipes,view: :normal),total_pages:recipes.total_pages,current_page:recipes.current_page}
     end
     def create
         
