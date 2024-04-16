@@ -3,7 +3,7 @@ class LikesController < ApplicationController
     def like
         @post = Post.find(params[:id])
         liked = @current_user.likes.find_by(post: @post)
-        #debugger
+        
         if liked.nil?  
             @post.likes += 1
             @post.save!
@@ -12,9 +12,5 @@ class LikesController < ApplicationController
         else
             render json: {'error':"post already liked"}, status: 403
         end
-
-
-
-
     end
 end

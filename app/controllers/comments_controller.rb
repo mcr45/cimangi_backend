@@ -3,13 +3,11 @@ class CommentsController < ApplicationController
     before_action :define_resource
 
     def show
-        comments=@resource.comments
-        
+        comments=@resource.comments  
         render json: comments, status: :ok
     end
 
-    def create
-        
+    def create 
         u=@current_user
         @comment=@resource.comments.new(body:comment_params[:body])
         @comment.user=u

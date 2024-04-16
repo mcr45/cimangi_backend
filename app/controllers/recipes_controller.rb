@@ -48,6 +48,11 @@ class RecipesController < ApplicationController
         recipe=recipes[0]
         render json: RecipeBlueprint.render(recipe,view: :normal)
     end
+    def latest_recipe
+        recipes=Recipe.order(views: :desc)
+        recipe=recipes[0]
+        render json: RecipeBlueprint.render(recipe,view: :normal)
+    end
 
     private
     def recipe_params
