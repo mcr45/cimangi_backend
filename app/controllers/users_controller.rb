@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_request,only:[:load_user]
+    before_action :authenticate_request
 def create
     user=User.new(user_params)
     if user.save
