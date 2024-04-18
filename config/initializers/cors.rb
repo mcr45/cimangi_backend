@@ -5,7 +5,7 @@
 
 # Read more: https://github.com/cyu/rack-cors http://localhost:4200
 
-=begin  Rails.application.config.middleware.insert_before 0, Rack::Cors do
+ Rails.application.config.middleware.insert_before 0, Rack::Cors do
    allow do
      origins "https://cimangi-frontend.vercel.app"
      resource "*",
@@ -13,8 +13,8 @@
        methods: [:get, :post, :put, :patch, :delete, :options, :head]
    end
  end 
-=end
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
+
+=begin Rails.application.config.middleware.insert_before 0, Rack::Cors do
    allow do
      origins "http://localhost:4200"
 
@@ -23,3 +23,4 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
        methods: [:get, :post, :put, :patch, :delete, :options, :head]
    end
  end
+=end
