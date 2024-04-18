@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'bestpost',to:'posts#best_post'
   get 'topviewsp', to:'posts#my_most_viewed'
   get 'topviewsr', to:'recipes#my_most_viewed'
+  get 'latestrecipe',to:'recipes#latest_recipe'
   resources :posts do
     resource :comments
   end
